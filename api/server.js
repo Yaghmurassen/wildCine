@@ -7,6 +7,21 @@ String.prototype.capitalize = function() {
   return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
+/**
+ * CORS PROBLEM
+ */
+const allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', "*");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+};
+/**
+ * INJECT MIDDLEWARE
+ */
+app.use(allowCrossDomain);
+
+///////////////////////////////////
 
 app.get('/', function(req, res) {
   res.send('Hello World!');
@@ -100,7 +115,7 @@ app.get('/search', function(req, res) {
     error.push("Le genre renseigné n'est pas valide. Veuillez rentrer un genre correct bande de fdp.");
   }
 
-  if(!error.length){
+  if (!error.length){
     fs.readFile('movies.json', (err, data) => {
       let films = JSON.parse(data);
 
@@ -112,18 +127,18 @@ app.get('/search', function(req, res) {
           }
         });
       }
-      if(req.query.genre){
+      if (req.query.genre){
         films = films.filter((e) => {
            if (e.Genre.includes(req.query.genre.capitalize())) {
-            console.log('Film avec le genre: '+ req.query.genre +' => '+ e.Title);
+            console.log('\nFilm avec le genre: '+ req.query.genre +' => '+ e.Title);
             return true;
           }
         });
       }
-
+      
       res.json(films);
     });
-  } else{
+  } else {
     res.send(error);
   }
 
