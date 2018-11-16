@@ -29,6 +29,11 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+
+h1 {
+	font-size: 50px;
+	color: rgb(165, 72, 72);
+}
 
 </style>

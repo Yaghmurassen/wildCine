@@ -1,11 +1,13 @@
 <template>
 <div>
-	<v-header title="Bienvenue sur le site !!"></v-header>
+	<v-header title="WILD CINEMA"></v-header>
 
-	<main>
-		<div v-for="film in films">
-			<film-card :film="film"></film-card>
-		</div>
+	<main class="main">
+	  <div class="carousel">
+		  <film-card class="carousel-item" v-for="film in films" :film="film"></film-card>
+	  </div>
+	
+		<!-- <see-list :film="films"></see-list> -->
 	</main>
 </div>	
 </template>
@@ -13,6 +15,10 @@
 <script>
 import VHeader from '@/components/VHeader'
 import FilmCard from '@/components/FilmCard'
+// import SeeList from '@/components/SeeList'
+import Grafikart from '@/components/Grafikart'
+
+
 import { mapState } from 'vuex'
 export default {
 	data() {
@@ -26,14 +32,22 @@ export default {
 	created() { // permet de déclencher une action au montage du composant
 		// fetcher les premières data
 		this.$store.dispatch('loadFilms');
+		this.$store.dispatch('loadFavoris')
 	},
 	components: { // permet de monter d'autres composants
 		VHeader,
-		FilmCard
+		FilmCard,
+		Grafikart
+		// SeeList
 	},
 }
 </script>
 
 <style>
+
+.main {
+	display: flex;
+}
+
 
 </style>
