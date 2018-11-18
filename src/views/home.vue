@@ -1,10 +1,8 @@
 <template>
 <div>
-	<v-header title="WILD CINEMA"></v-header>
-
 	<main class="main">
 	  <div class="carousel">
-		  <film-card class="carousel-item" v-for="film in films" :film="film"></film-card>
+		  <film-card class="carousel-item" v-for="film in films" :key="film.id" :film="film"></film-card>
 	  </div>
 	
 		<!-- <see-list :film="films"></see-list> -->
@@ -13,11 +11,7 @@
 </template>
 
 <script>
-import VHeader from '@/components/VHeader'
 import FilmCard from '@/components/FilmCard'
-// import SeeList from '@/components/SeeList'
-import Grafikart from '@/components/Grafikart'
-
 
 import { mapState } from 'vuex'
 export default {
@@ -26,28 +20,36 @@ export default {
 		}
 	},
 	computed: mapState({
-		// arrow functions can make the code very succinct!
-		films: state => state.films,
+		films: state => state.films
   	}),
 	created() { // permet de déclencher une action au montage du composant
 		// fetcher les premières data
 		this.$store.dispatch('loadFilms');
-		this.$store.dispatch('loadFavoris')
+		this.$store.dispatch('loadFavoris');
+
+		// var elems = document.querySelectorAll('.carousel');
+		// var instances = M.Carousel.init(elems);
+
+	},
+	mounted() { 
+		M.AutoInit();
 	},
 	components: { // permet de monter d'autres composants
-		VHeader,
-		FilmCard,
-		Grafikart
-		// SeeList
+		FilmCard
 	},
 }
 </script>
 
-<style>
+<style lang="scss">
 
 .main {
 	display: flex;
 }
-
+.carousel{
+	height: 430px;
+	& .carousel-item {
+		top: -50px;
+	}
+}
 
 </style>

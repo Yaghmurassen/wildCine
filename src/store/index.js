@@ -13,8 +13,8 @@ export default new Vuex.Store({
 		initFilms (state, films) {
 			state.films = films;
 		},
-		favoris (state, favoris) {
-			state.favoris = favoris;
+		mutateFavoris (state, fav) {
+			state.favoris = fav;
 		}
 	},
 	actions: { // store.dispatch()
@@ -36,15 +36,32 @@ export default new Vuex.Store({
 		},
 		loadFavoris({ commit }) {
 			if (localStorage.favoris) {
-				commit('favoris', JSON.parse(localStorage.getItem('favoris')))
+				commit('mutateFavoris', JSON.parse(localStorage.getItem('favoris')))
 			}
 		},
-		addFavoris({ commit }, id) {
-			debugger;
-			const prevFavoris = JSON.parse(localStorage.getItem('favoris'))
+		addFavoris({ commit }, id) { 
+			if (localStorage.favoris) {
+				const prevFavoris = JSON.parse(localStorage.getItem('favoris'));
+				if (!prevFavoris.includes(id)) {
+					prevFavoris.push(id);
+					localStorage.setItem('favoris', JSON.stringify(prevFavoris));
+				}
+				console.log(localStorage)
+
+			} else {
+				localStorage.setItem(
+					'favoris',
+					JSON.stringify( [ id ] )
+				)
+			}
 		},
 		rmFavoris({ commit }, id) {
-			const prevFavoris = JSON.parse(localStorage.getItem('favoris'))
+			const prevFavoris = JSON.parse(localStorage.getItem('favoris'));
+			// if (prevFavoris.indexOf(id) == -1) { debugger
+			   prevFavoris.splice(prevFavoris.indexOf(id), 1) 
+			   localStorage.setItem('favoris', JSON.stringify(prevFavoris));
+			// }
+			console.log(localStorage)
 		}
 	}
 })
