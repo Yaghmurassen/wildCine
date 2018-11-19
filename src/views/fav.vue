@@ -1,52 +1,47 @@
 <template>
     <div class="fav">
-        <ul v-for="film in films" :key="film.id">
-            <li v-for="favs in favss" v-if="film.id == favs">
-                <img :src="film.Poster" alt="Affiche">
-                <p>{{film.Title}} est sortie en {{film.Year}}. Il appartient aux genres suivant : {{film.Genre}}. Les acteurs principaux sont {{film.Actors}}.</p>
-                <p>Lors de sa sortie {{film.Title}} a été récompensé par {{film.Awards}}</p>
+        <ul>
+            <li v-for="film in userFavs">
+				<div class="row">
+					<div class="col s12 m3 l2">
+						<img class="responsive-img zoom" :src="film.Poster" alt="Affiche">
+					</div>
+					<div class="col s12 m9 l10">
+						<p>{{film.Title}} est sortie en {{film.Year}}. Il appartient aux genres suivant : {{film.Genre}}. Les acteurs principaux sont {{film.Actors}}.</p>
+						<p>Lors de sa sortie {{film.Title}} a été récompensé par {{film.Awards}}</p>
+					</div>
+				</div>
             </li>
         </ul>
     </div>
 </template>
-
 
 <script>
 import { mapState } from 'vuex'
 import axios from 'axios'
 
 export default {
-    props: ['film'],
     data() {
 		return {
-            // fav: true
 		}
     },
-    computed: mapState({
-        films: state => state.films,
-        favss: state => state.favoris
-  	}),
-    created() { 
+	computed: {
+		...mapState({
+			films: state => state.films,
+			favss: state => state.favoris
+		}),
+		userFavs() {
+			return this.$store.state.films.filter( el => {
+				return this.$store.state.favoris.includes(el.id)
+			})
+		}
+
+	},
+    created () { 
 
         this.$store.dispatch('loadFilms');
         this.$store.dispatch('loadFavoris');
-        
-        console.log(this.films.length, this.films[0].id)
 
-		// let id = this.film.id,
-        // let favs = this.$store.state.favoris;
-        // console.log(favs) 
-        
-        
-        // for (let i = 0; i < this.films.length; i++) { debugger
-        //   JSON.parse(localStorage.getItem('favoris')).forEach(e => {
-        //       if (this.films[i].id == JSON.parse(localStorage.getItem('favoris'))) { debugger
-        //           this.fav = true;
-        //       } else {
-        //           this.fav = false;
-        //       }
-        //   });
-        // }
     }
 }
 
@@ -63,17 +58,44 @@ export default {
    background-color: grey;
 }
 
+.row {
+	background-color: #98998291;
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 12px 0 rgba(0,0,0,0.19);
+}
+
 img { 
-   height: 10em;
+	max-width: 150px;
+//    height: 10em;
+//    float: left;
 }
 
 ul {
     display: flex;
     padding-left: 15px;
-    justify-content: flex-start;
+    flex-direction: column;
     padding-top: 10px;
     padding-right: 15px;
 }
 
+li {
+	padding-bottom: 15px;
+}
+
+p {	    
+	padding-left: 25px;
+}
+.zoom {
+  -moz-transition: all 1.5s;
+  -webkit-transition: all 1.5s;
+  transition: all 1.5s;
+}
+
+
+.zoom:hover {
+	transform: scale(1.5); 
+  	-moz-transition: all 1.5s;
+    -webkit-transition: all 1.5s;
+    transition: all 1.5s;
+}
 
 </style>
