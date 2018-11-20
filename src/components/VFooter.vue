@@ -5,7 +5,7 @@
 		<div class="row">
 			<div class="col l6 s12">
 			<h5 class="white-text">Wild Cine</h5>
-			<p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+			<p class="grey-text text-lighten-4">“Le cinéma, c’est l’écriture moderne dont l’encre est la lumière.” - Jean Cocteau</p> 
 			</div>
 			<div class="col l4 offset-l2 s12">
 			<h5 class="white-text">Share</h5>
@@ -21,7 +21,7 @@
 		<div class="footer-copyright">
 		<div class="container">
 		© 2018 Copyright Yaghmurassen Sainson
-		<a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+		<a class="grey-text text-lighten-4 right" target="_blank" href="https://wildcodeschool.fr/">Wild Code School</a>
 		</div>
 		</div>
 	</footer>
@@ -67,7 +67,15 @@ li {
 
 .container {
     text-align: left;
-	margin-bottom: -20px;
+	// margin-bottom: -20px;
 }
+.right:hover {
+	opacity: 0.5;
+}
+
+h5 {
+	margin:10px 0;
+}
+
 
 </style>

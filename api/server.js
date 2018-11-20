@@ -58,19 +58,19 @@ app.get('/movies/id/:id', function(req, res) {
 	  let films = JSON.parse(data);
 	  let resultatFilm = [];
 	  films.forEach((e) => {
-		if (e.id === req.params.id) {
-		  console.log('Le titre du film est : ' + e.Title + '.');
-		  resultatFilm.push(e);
-		} 
+      if (e.id === req.params.id) {
+        // console.log('Le titre du film est : ' + e.Title + '.');
+        resultatFilm.push(e);
+      } 
 	  });
 	  // console.log(resultatFilm);
-	  if (resultatFilm.length){
+	  if (resultatFilm.length) {
 		  res.json(resultatFilm);
 	  } else {
-		  res.json({'error':'Votre recherche n\'a aboutit à aucun résultat. Veuillez faire preuve de moins d\'imagination'});
+		  res.json({'error':'Votre recherche n\'a aboutit à aucun résultat. Veuillez faire preuve de moins d\'originalité !'});
 	  }
 	});
-  });
+});
 
 /*app.get('/search', function(req, res) {
   // instantiate variables de recherche

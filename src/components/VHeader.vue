@@ -33,12 +33,12 @@
                 </ul>
             </div>
         </nav>
-		<ul v-for="film in films" :key="film.id" v-show="input" class="collection">
+		<ul v-for="film in films" :key="film.id" v-model="input" class="collection">
 			<li class="collection-item avatar">
-				<img  alt="Affiche" class="circle">
-				<span class="title">Title</span>
-				<p>First Line <br>
-					Second Line
+				<img :src="film.Poster" alt="Affiche" class="circle">
+				<span class="title">{{film.Title}}</span>
+				<p>{{film.Year}}, {{film.Director}}<br>
+				   {{film.Runtime}}
 				</p>
 				<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
 			</li>
@@ -76,11 +76,11 @@
             search() {
                 // gérer l'autocomplete
                 if (this.search.length > 1) {
-					this.$store.dispatch('afficheUnFilm', this.search);
+					this.$store.dispatch('searchFilms', 'afficheUnFilm');
 					this.input = true;
-                } else { 
+                } else {
                     this.$store.dispatch('loadFilms');
-                }   
+                }
             }
         },
         mounted() {
@@ -118,7 +118,16 @@ nav {
     left: 20px;
  }  
 }
+.title {
+    font-weight: bold;
+}
+.avatar {
+    text-align: left;
+} 
 
+.collection-item {
+    background-color: #bcc0c3;
+}
 
 </style>
 
