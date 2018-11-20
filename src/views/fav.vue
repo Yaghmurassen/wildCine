@@ -4,12 +4,13 @@
             <li v-for="film in userFavs">
                 <div class="row">
                     <div class="col s12 m3 l2">
+						<i @click="rmFav" class="btn fa fa-times-circle"></i>
                         <img class="responsive-img" :src="film.Poster" alt="Affiche">
                     </div>
                     <div class="col s12 m9 l10">
                         <p><strong>{{film.Title}}</strong> est sortie en {{film.Year}}. Il appartient aux genres suivant : {{film.Genre}}. Les acteurs principaux sont {{film.Actors}}.</p>
                         <p>Lors de sa sortie {{film.Title}} a été récompensé par {{film.Awards}}</p>
-                        <p><strong>{{film.Synopsis}}</strong> : {{film.Plot0}}</p>
+                        <p><strong>{{film.Synopsis}}</strong> : <span class="truncate">{{film.Plot}}</span></p>
                     </div>
                 </div>
             </li>
@@ -38,12 +39,14 @@ export default {
 		}
 
 	},
-
+	methods: {
+		rmFav() { debugger
+				this.$store.dispatch('rmFavoris', this.films.id)
+		}
+	}, 
     created () { 
-
         this.$store.dispatch('loadFilms');
         this.$store.dispatch('loadFavoris');
-
     }
 }
 
@@ -51,21 +54,21 @@ export default {
 
 </script>
 
-
 <style lang="scss" scoped>
 
 .fav {
    margin-top: 30px; 
-   height: 100%;
+//    height: 100%;
    max-width: 1200px;
    margin: auto;
    background-color: grey;
 }
 
 .row {
+	position: relative;
     background-color: #bfbfb9;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 12px 0 rgba(0,0,0,0.19);
-    border-radius: 35px;
+    border-radius: 5px;
 }
 
 img { 
@@ -104,6 +107,12 @@ p {
         padding-top: 30px;
         }
     }
+}
+
+i {
+	position: absolute;
+    right: 20px;
+    top: 10px;
 }
 
 strong {

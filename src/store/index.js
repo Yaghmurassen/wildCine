@@ -45,14 +45,16 @@ export default new Vuex.Store({
 				if (!prevFavoris.includes(id)) {
 					prevFavoris.push(id);
 					localStorage.setItem('favoris', JSON.stringify(prevFavoris));
+					commit('mutateFavoris', prevFavoris);
 				}
 				console.log(localStorage)
 
 			} else {
 				localStorage.setItem(
 					'favoris',
-					JSON.stringify( [ id ] )
+					JSON.stringify([ id ])
 				)
+				commit('mutateFavoris', [id]);
 			}
 		},
 		rmFavoris({ commit }, id) {
@@ -61,7 +63,17 @@ export default new Vuex.Store({
 			   prevFavoris.splice(prevFavoris.indexOf(id), 1) 
 			   localStorage.setItem('favoris', JSON.stringify(prevFavoris));
 			// }
+			commit('mutateFavoris', prevFavoris);
 			console.log(localStorage)
-		}
+		},
+		afficheUnFilm({ commit }, userInput) {
+			axios.get(`http://localhost:3000/movies/id/${userInput}`)
+				.then( ({ data }) => {
+					commit('initFilms', data);
+				})
+				.catch(e => {
+					console.error(e)
+				})
+		},
 	}
 })

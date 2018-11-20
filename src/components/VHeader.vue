@@ -33,7 +33,20 @@
                 </ul>
             </div>
         </nav>
-                
+		<ul v-for="film in films" :key="film.id" v-show="input" class="collection">
+			<li class="collection-item avatar">
+				<img  alt="Affiche" class="circle">
+				<span class="title">Title</span>
+				<p>First Line <br>
+					Second Line
+				</p>
+				<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+			</li>
+		</ul>
+
+
+
+
                 
     </header>
 </template>
@@ -43,14 +56,15 @@
     import axios from 'axios'
 
     export default {
-        props: ["title"],
+        props: ["title", "film"],
         data() {
             return {
-                search: ''
+				search: '',
+				input: false,
             }
         },
         computed: mapState({
-            // films: state => state.films,
+            films: state => state.films,
             favss: state => state.favoris,
             count() {
                 return this.favss.length
@@ -62,7 +76,8 @@
             search() {
                 // gérer l'autocomplete
                 if (this.search.length > 1) {
-                    this.$store.dispatch('searchFilms', this.search);
+					this.$store.dispatch('afficheUnFilm', this.search);
+					this.input = true;
                 } else { 
                     this.$store.dispatch('loadFilms');
                 }   
@@ -95,6 +110,7 @@ h1 {
 
 nav {
   background-color:	#54626c;
+      border-radius: 3px;
 }
 
 @media screen and (min-width: $break-large) {
@@ -105,3 +121,7 @@ nav {
 
 
 </style>
+
+
+
+

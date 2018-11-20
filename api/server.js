@@ -49,8 +49,28 @@ app.get('/movies/:title', function(req, res) {
     // console.log(resultatFilm);
     res.json(resultatFilm);
   });
-
 });
+
+app.get('/movies/id/:id', function(req, res) {
+	// console.log(req.params.title);
+	// res.send(req.params.title);
+	fs.readFile('movies.json', (err, data) => {
+	  let films = JSON.parse(data);
+	  let resultatFilm = [];
+	  films.forEach((e) => {
+		if (e.id === req.params.id) {
+		  console.log('Le titre du film est : ' + e.Title + '.');
+		  resultatFilm.push(e);
+		} 
+	  });
+	  // console.log(resultatFilm);
+	  if (resultatFilm.length){
+		  res.json(resultatFilm);
+	  } else {
+		  res.json({'error':'Votre recherche n\'a aboutit à aucun résultat. Veuillez faire preuve de moins d\'imagination'});
+	  }
+	});
+  });
 
 /*app.get('/search', function(req, res) {
   // instantiate variables de recherche
