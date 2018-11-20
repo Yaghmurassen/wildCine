@@ -1,52 +1,48 @@
 <template>
     <div class="fav">
-        <ul v-for="film in films" :key="film.id">
-            <li v-for="favs in favss" v-if="film.id == favs">
-                <img :src="film.Poster" alt="Affiche">
-                <p>{{film.Title}} est sortie en {{film.Year}}. Il appartient aux genres suivant : {{film.Genre}}. Les acteurs principaux sont {{film.Actors}}.</p>
-                <p>Lors de sa sortie {{film.Title}} a été récompensé par {{film.Awards}}</p>
+        <ul>
+            <li v-for="film in userFavs">
+                <div class="row">
+                    <div class="col s12 m3 l2">
+                        <img class="responsive-img" :src="film.Poster" alt="Affiche">
+                    </div>
+                    <div class="col s12 m9 l10">
+                        <p><strong>{{film.Title}}</strong> est sortie en {{film.Year}}. Il appartient aux genres suivant : {{film.Genre}}. Les acteurs principaux sont {{film.Actors}}.</p>
+                        <p>Lors de sa sortie {{film.Title}} a été récompensé par {{film.Awards}}</p>
+                        <p><strong>{{film.Synopsis}}</strong> : {{film.Plot0}}</p>
+                    </div>
+                </div>
             </li>
         </ul>
     </div>
 </template>
-
 
 <script>
 import { mapState } from 'vuex'
 import axios from 'axios'
 
 export default {
-    props: ['film'],
     data() {
-		return {
-            // fav: true
-		}
+        return {
+        }
     },
-    computed: mapState({
-        films: state => state.films,
-        favss: state => state.favoris
-  	}),
-    created() { 
+    computed: {
+        ...mapState({
+            films: state => state.films,
+            favss: state => state.favoris
+        }),
+        userFavs() {
+            return this.$store.state.films.filter( el => {
+                return this.$store.state.favoris.includes(el.id)
+            })
+        }
+
+    },
+    created () { 
 
         this.$store.dispatch('loadFilms');
         this.$store.dispatch('loadFavoris');
-        
-        console.log(this.films.length, this.films[0].id)
 
-		// let id = this.film.id,
-        // let favs = this.$store.state.favoris;
-        // console.log(favs) 
-        
-        
-        // for (let i = 0; i < this.films.length; i++) { debugger
-        //   JSON.parse(localStorage.getItem('favoris')).forEach(e => {
-        //       if (this.films[i].id == JSON.parse(localStorage.getItem('favoris'))) { debugger
-        //           this.fav = true;
-        //       } else {
-        //           this.fav = false;
-        //       }
-        //   });
-        // }
     }
 }
 
@@ -58,22 +54,75 @@ export default {
 <style lang="scss" scoped>
 
 .fav {
-   margin-top: 25px; 
+   margin-top: 30px; 
    height: 100%;
+   max-width: 1200px;
+   margin: auto;
    background-color: grey;
 }
 
+.row {
+    background-color: #bfbfb9;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 12px 0 rgba(0,0,0,0.19);
+    border-radius: 35px;
+}
+
 img { 
-   height: 10em;
+    max-width: 150px;
+    padding-top: 6px;
+    -moz-transition: all 1.5s;
+    -webkit-transition: all 1.5s;
+    transition: all 1.5s;
+    &:hover{
+        opacity: 0.5;
+        transform: scaleX(1.2);
+        transition-duration: 800ms;
+        cursor: pointer;
+    }
 }
 
 ul {
     display: flex;
     padding-left: 15px;
-    justify-content: flex-start;
+    flex-direction: column;
     padding-top: 10px;
     padding-right: 15px;
+    margin-top: 40px;
 }
 
+li {
+    padding-bottom: 15px;
+}
+
+p {    
+    text-align: left; 
+    padding: 0 30px;
+    color: #333;
+    @media screen and (min-width: 720px) {
+        &:first-of-type {
+        padding-top: 30px;
+        }
+    }
+}
+
+strong {
+    font-size: 20px;
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+// .zoom {
+//   -moz-transition: all 1.5s;
+//   -webkit-transition: all 1.5s;
+//   transition: all 1.5s;
+// }
+
+// .zoom:hover {
+//     transform: scale(1.5); 
+//     -moz-transition: all 1.5s;
+//     -webkit-transition: all 1.5s;
+//     transition: all 1.5s;
+// }
 
 </style>

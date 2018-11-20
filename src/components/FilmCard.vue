@@ -1,5 +1,5 @@
 <template>
-	<a class="listfilm z-depth-3">
+	<a class="listfilm">
 		<img :src="film.Poster" alt="Affiche">
 		<a class="btn-floating pulse"><i :class="favClass" @click.stop="toggleFav"></i></a>
 	</a>
