@@ -66,10 +66,11 @@ export default new Vuex.Store({
 			commit('mutateFavoris', prevFavoris);
 			console.log(localStorage)
 		},
-		afficheUnFilm({ commit }, userInput) {
-			axios.get(`http://localhost:3000/movies/id/${userInput}`)
+		afficheUnFilm({ commit }, userInput) { debugger
+			axios.get(`http://localhost:3000/movies/id/${userInput.id}`)
 				.then( ({ data }) => {
 					commit('initFilms', data);
+					userInput.callback();
 				})
 				.catch(e => {
 					console.error(e)

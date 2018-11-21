@@ -4,7 +4,7 @@
             <li v-for="film in userFavs">
                 <div class="row">
                     <div class="col s12 m3 l2">
-						<i @click="rmFav" class="btn fa fa-times-circle"></i>
+						<i @click="rmFav(film.id)" class="btn fa fa-times-circle"></i>
                         <img class="responsive-img" :src="film.Poster" alt="Affiche">
                     </div>
                     <div class="col s12 m9 l10">
@@ -40,8 +40,8 @@ export default {
 
 	},
 	methods: {
-		rmFav() { debugger
-				this.$store.dispatch('rmFavoris', this.films.id)
+		rmFav(id) { 
+				this.$store.dispatch('rmFavoris', id)
 		}
 	}, 
     created () { 

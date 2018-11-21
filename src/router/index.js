@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/views/home'
 import Fav from '@/views/fav'
+import Film from '@/views/Film'
 
 Vue.use(Router)
 
@@ -16,6 +17,11 @@ export default new Router({
       path: '/favoris',
       name: 'fav',
       component: Fav
-    }
+	},
+	{
+		path: '/film',
+		name: 'film',
+		component: Film
+	}
   ]
 })

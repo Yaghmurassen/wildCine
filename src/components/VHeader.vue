@@ -33,7 +33,7 @@
                 </ul>
             </div>
         </nav>
-		<ul v-for="film in films" :key="film.id" v-model="input" class="collection">
+		<ul @click="afficheUnFilm(film.id)" v-if="film.length !== 0" v-for="film in films" :key="film.id" v-show="input" class="collection">
 			<li class="collection-item avatar">
 				<img :src="film.Poster" alt="Affiche" class="circle">
 				<span class="title">{{film.Title}}</span>
@@ -44,7 +44,7 @@
 			</li>
 		</ul>
 
-
+		<div v-else><p>Votre recherche n'a aboutit à aucun résultat, veuillez ne pas être aussi culturé !!</p></div>
 
 
                 
@@ -73,16 +73,25 @@
         created() {
         },
         watch: {
-            search() {
+            search(uno, dos) { debugger
                 // gérer l'autocomplete
-                if (this.search.length > 1) {
-					this.$store.dispatch('searchFilms', 'afficheUnFilm');
+                if (uno.length > 1) {
+					this.$store.dispatch('searchFilms', uno);
 					this.input = true;
                 } else {
-                    this.$store.dispatch('loadFilms');
-                }
+					this.$store.dispatch('loadFilms');
+					this.input = false;
+				}
             }
-        },
+		},
+		methods : {
+			afficheUnFilm(id) { debugger
+				this.$store.dispatch('afficheUnFilm', {id:id, callback: () =>  {
+					this.$router.push('/Film');
+					this.input = false;
+				}})
+			}
+		},
         mounted() {
             // document.querySelectorAll('.dropdown-button').dropdown();
             document.addEventListener('DOMContentLoaded', function() {
@@ -127,6 +136,12 @@ nav {
 
 .collection-item {
     background-color: #bcc0c3;
+}
+
+.collection :hover {
+	cursor: pointer;
+	// opacity: 0.9;
+	background-color: #ffffff;
 }
 
 </style>
