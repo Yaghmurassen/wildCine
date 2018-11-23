@@ -66,7 +66,7 @@ export default new Vuex.Store({
 			commit('mutateFavoris', prevFavoris);
 			console.log(localStorage)
 		},
-		afficheUnFilm({ commit }, userInput) { debugger
+		afficheUnFilm({ commit }, userInput) { 
 			axios.get(`http://localhost:3000/movies/id/${userInput.id}`)
 				.then( ({ data }) => {
 					commit('initFilms', data);

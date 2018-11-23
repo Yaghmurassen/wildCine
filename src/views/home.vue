@@ -1,5 +1,5 @@
 <template>
-<div>
+<div style="height:81vh">
 	<main class="main">
 	  <div class="carousel">
 		  <film-card class="carousel-item" v-for="film in films" :key="film.id" :film="film"></film-card>
@@ -72,7 +72,7 @@ p {
 article {
 	padding-top: 30px;
 	padding-bottom: 30px;
-	margin-top: 40px;
+	margin-top: 230px;
 	margin-bottom: 30px;
 	margin-left: auto;
     margin-right: auto;

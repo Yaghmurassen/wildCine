@@ -73,7 +73,10 @@
         created() {
         },
         watch: {
-            search(uno, dos) { debugger
+			search(uno, dos) { debugger
+				if (this.$route.path === '/Film') {
+				this.$router.push('/');
+				}
                 // gérer l'autocomplete
                 if (uno.length > 1) {
 					this.$store.dispatch('searchFilms', uno);
@@ -85,7 +88,7 @@
             }
 		},
 		methods : {
-			afficheUnFilm(id) { debugger
+			afficheUnFilm(id) { 
 				this.$store.dispatch('afficheUnFilm', {id:id, callback: () =>  {
 					this.$router.push('/Film');
 					this.input = false;
