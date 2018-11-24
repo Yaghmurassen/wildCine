@@ -73,7 +73,7 @@
         created() {
         },
         watch: {
-			search(uno, dos) { debugger
+			search(uno, dos) { 
 				if (this.$route.path === '/Film') {
 				this.$router.push('/');
 				}

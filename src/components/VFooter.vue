@@ -43,7 +43,7 @@ export default {
 	padding-top: unset;
 	// position: fixed;
     bottom: 0px;
-    width: 98vw;
+    // width: 98vw;
 }
 
 img {

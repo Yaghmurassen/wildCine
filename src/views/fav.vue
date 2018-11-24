@@ -4,13 +4,13 @@
             <li v-for="film in userFavs">
                 <div class="row">
                     <div class="col s12 m3 l2">
-						<i @click="rmFav(film.id)" class="btn fa fa-times-circle"></i>
-                        <img class="responsive-img" :src="film.Poster" alt="Affiche">
+						<i @click="rmFav(film.id)" class="bt fa fa-times-circle"></i>
+                        <img @click="afficheUnFilm(film.id)" class="responsive-img" :src="film.Poster" alt="Affiche">
                     </div>
                     <div class="col s12 m9 l10">
-                        <p><strong>{{film.Title}}</strong> est sortie en {{film.Year}}. Il appartient aux genres suivant : {{film.Genre}}. Les acteurs principaux sont {{film.Actors}}.</p>
+                        <p><strong @click="afficheUnFilm(film.id)">{{film.Title}}</strong> est sortie en {{film.Year}}. Il appartient aux genres suivant : {{film.Genre}}. Les acteurs principaux sont {{film.Actors}}.</p>
                         <p>Lors de sa sortie {{film.Title}} a été récompensé par {{film.Awards}}</p>
-                        <p><strong>{{film.Synopsis}}</strong> : <span class="truncate">{{film.Plot}}</span></p>
+                        <p><strong @click="afficheUnFilm(film.id)">{{film.Synopsis}}</strong> : <span class="truncate">{{film.Plot}}</span></p>
                     </div>
                 </div>
             </li>
@@ -23,6 +23,7 @@ import { mapState } from 'vuex'
 import axios from 'axios'
 
 export default {
+    props: ["film"],
     data() {
 		return {
 		}
@@ -42,7 +43,18 @@ export default {
 	methods: {
 		rmFav(id) { 
 				this.$store.dispatch('rmFavoris', id)
-		}
+        },
+        // navigateTo: function (nav) { debugger 
+        //     this.$router.go({
+        //         path: nav
+        //     })
+        // },
+        afficheUnFilm(id) { 
+            this.$store.dispatch('afficheUnFilm', {id:id, callback: () =>  {
+                this.$router.push('/Film');
+                this.input = false;
+            }})
+        }
 	}, 
     created () { 
         this.$store.dispatch('loadFilms');
@@ -119,6 +131,15 @@ strong {
     font-size: 20px;
     &:hover{
         cursor: pointer;
+    }
+}
+
+.bt {
+	-webkit-transition: background-color .2s ease-out;
+    transition: background-color .2s ease-out;
+    cursor: pointer;
+    &:hover {
+        transform: scale(1.2);
     }
 }
 

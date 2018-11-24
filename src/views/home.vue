@@ -4,8 +4,6 @@
 	  <div class="carousel">
 		  <film-card class="carousel-item" v-for="film in films" :key="film.id" :film="film"></film-card>
 	  </div>
-	
-		<!-- <see-list :film="films"></see-list> -->
 	</main>
 	<article>
 		<p>WildCine est une plateforme OpenSource de base de donnée de films. Les utilisateurs peuvent rechercher et constituer leurs favoris dans un espace dédié.</p>
@@ -72,7 +70,7 @@ p {
 article {
 	padding-top: 30px;
 	padding-bottom: 30px;
-	margin-top: 230px;
+	margin-top: 30px;
 	margin-bottom: 30px;
 	margin-left: auto;
     margin-right: auto;
