@@ -71,6 +71,7 @@ export default {
 .fav {
    margin-top: 30px; 
 //    height: 100%;
+   min-height: 70vh;
    max-width: 1200px;
    margin: auto;
    background-color: grey;

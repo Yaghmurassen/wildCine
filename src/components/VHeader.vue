@@ -1,18 +1,36 @@
 <template>
     <header>
         <!-- Dropdown Structure -->
-        <ul id="dropdown1" class="dropdown-content">
-            <li><a href="#!">one</a></li>
-            <li><a href="#!">two</a></li>
-            <li class="divider"></li>
-            <li><a href="#!">three</a></li>
+        <ul v-for="film in films" :key="film.Genre" id="dropdown1" class="dropdown-content">
+            <li><a href="#!">Action</a></li>
+            <li><a href="#!">Adventure</a></li>
+            <li><a href="#!">Fantasy</a></li>
+            <li><a href="#!">Drama</a></li>
+            <li><a href="#!">Horror</a></li>
+            <li><a href="#!">Sci-Fi</a></li>
+            <li><a href="#!">Thriller</a></li>
+            <li><a href="#!">Comedy</a></li>
+            <li><a href="#!">Crime</a></li>
+            <li><a href="#!">Biography</a></li>
+            <li><a href="#!">History</a></li>
         </ul>
-        <ul id="dropdown1" class="dropdown-content">
-            <li><a href="#!">one</a></li>
-            <li><a href="#!">two</a></li>
-            <li class="divider"></li>
-            <li><a href="#!">three</a></li>
-        </ul>
+
+        <!-- Slide Nav On Mobile -->
+
+        <ul id="slide-out" class="side-nav">
+                <li><div class="user-view">
+                        <div class="background">
+                            <img src="images/office.jpg">
+                        </div>
+                    </div>
+                </li>
+                <li><a href="#!"><i class="fa fa-heart" style="font-size:12px"></i><router-link to="/favoris"> Favoris</router-link></a></li>
+                <li><input class="waves-effect" type="text" v-model="search"></li>
+             </ul>
+
+        <a href="#" @click="toggleClick()" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+
+
         <nav>
             <div class="nav-wrapper">
                 <a href="/home" class="brand-logo">WildCine</a>
@@ -21,7 +39,7 @@
                     <li><router-link to="/favoris">Favoris<span class="new badge">{{ count }}</span></router-link></li>
                     <!-- Dropdown Trigger -->
                     <li>
-                        <a class="dropdown-button" href="#!" data-activates="dropdown1">Genre
+                        <a @click="toggleClick()" class="dropdown-button" href="#!" v-model="genre" data-activates="dropdown1">Genre
                             <i class="material-icons right"></i>
                         </a>
                     </li>
@@ -33,7 +51,7 @@
                 </ul>
             </div>
         </nav>
-		<ul @click="afficheUnFilm(film.id)" v-if="film.length !== 0" v-for="film in films" :key="film.id" v-show="input" class="collection">
+		<ul @click="afficheUnFilm(film.id)" v-if="film.id.length !== 0" v-for="film in films" :key="film.id" v-show="input" class="collection">
 			<li class="collection-item avatar">
 				<img :src="film.Poster" alt="Affiche" class="circle">
 				<span class="title">{{film.Title}}</span>
@@ -60,20 +78,31 @@
         data() {
             return {
 				search: '',
-				input: false,
+                input: false,
+                // isHide: false,
+                genre: '',
             }
         },
         computed: mapState({
             films: state => state.films,
             favss: state => state.favoris,
+            // genre: state => state.genre,
             count() {
                 return this.favss.length
+            },
+            genre: function() {
+                return this.film.filter(function(genre) {
+                    if (this.film[id].Genre === this.film.Genre) {
+                        return this.film[id]
+                        afficheUnFilm(film.id)
+                    }
+                })
             }
         }),
         created() {
         },
         watch: {
-			search(uno, dos) { 
+			search(uno, dos) {  console.log(this.film)
 				if (this.$route.path === '/Film') {
 				this.$router.push('/');
 				}
@@ -85,6 +114,9 @@
 					this.$store.dispatch('loadFilms');
 					this.input = false;
 				}
+            },
+            genre(){
+                console.log(this.film)
             }
 		},
 		methods : {
@@ -93,7 +125,15 @@
 					this.$router.push('/Film');
 					this.input = false;
 				}})
-			}
+            },
+            toggleClick() { 
+                let isShow = $('.side-nav').show();
+                if (isShow) { debugger
+                    $('.side-nav').hide();
+                } else { debugger
+                    $('.side-nav').show();
+                }
+            }
 		},
         mounted() {
             // document.querySelectorAll('.dropdown-button').dropdown();
@@ -101,6 +141,30 @@
                 var elems = document.querySelectorAll('.dropdown-button');
                 var instances = M.Dropdown.init(elems);
             });
+
+              document.addEventListener('DOMContentLoaded', function() {
+                var elems = document.querySelectorAll('.dropdown-trigger');
+                var instances = M.Dropdown.init(elems);
+            });
+
+            // $('.dropdown-trigger').dropdown();
+
+            // $(".button-collapse").sideNav();
+            // $('.button-collapse').sideNav('show'); debugger
+            // $('.collapsible').collapsible();
+
+            // this.toggleClick()
+            
+            // {
+            //     menuWidth: 300, // Default is 300
+            //     edge: 'right', // Choose the horizontal origin
+            //     closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+            //     draggable: true, // Choose whether you can drag to open on touch screens,
+            //     onOpen: function(el) { }, // A function to be called when sideNav is opened
+            //     onClose: function(el) { }, // A function to be called when sideNav is closed
+            //     }
+            
+        
         }     
     }
 
@@ -147,8 +211,25 @@ nav {
 	background-color: #ffffff;
 }
 
+#slide-out {
+    background-color: wheat;
+    border-radius: 4px;
+}
+
+
 </style>
 
 
 
+
+// $( ".faq-question" ).click(function() {
+//     $(this).toggleClass('open');
+// });
+
+// .faq-question .icon:after {
+//     content: '+';
+// }
+// .faq-question.open .icon:after {
+//     content: '-';
+// }
 
