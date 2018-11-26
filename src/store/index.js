@@ -76,5 +76,18 @@ export default new Vuex.Store({
 					console.error(e)
 				})
 		},
+		searchGenre({ commit }, userInput) {
+			axios.get(`http://localhost:3000/search`, {
+				params: {
+					genre: userInput
+				}
+			})
+				.then( ({ data }) => {
+					commit('initFilms', data);
+				})
+				.catch(e => {
+					console.error(e)
+				})
+		}
 	}
 })

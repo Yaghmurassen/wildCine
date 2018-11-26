@@ -1,18 +1,18 @@
 <template>
     <header>
         <!-- Dropdown Structure -->
-        <ul v-for="film in films" :key="film.Genre" id="dropdown1" class="dropdown-content">
-            <li><a href="#!">Action</a></li>
-            <li><a href="#!">Adventure</a></li>
-            <li><a href="#!">Fantasy</a></li>
-            <li><a href="#!">Drama</a></li>
-            <li><a href="#!">Horror</a></li>
-            <li><a href="#!">Sci-Fi</a></li>
-            <li><a href="#!">Thriller</a></li>
-            <li><a href="#!">Comedy</a></li>
-            <li><a href="#!">Crime</a></li>
-            <li><a href="#!">Biography</a></li>
-            <li><a href="#!">History</a></li>
+        <ul id="dropdown1" class="dropdown-content">
+            <li><router-link to="search?genre=Action">Action</router-link></li>
+            <li><router-link to="search?genre=Adventure">Adventure</router-link></li>
+            <li><router-link to="search?genre=Fantasy">Fantasy</router-link></li>
+            <li><router-link to="search?genre=Drama">Drama</router-link></li>
+            <li><router-link to="search?genre=Horror">Horror</router-link></li>
+            <li><router-link to="search?genre=Sci">Sci-Fi</router-link></li>
+            <li><router-link to="search?genre=Thriller">Thriller</router-link></li>
+            <li><router-link to="search?genre=Comedy">Comedy</router-link></li>
+            <li><router-link to="search?genre=Crime">Crime</router-link></li>
+            <li><router-link to="search?genre=Biography">Biography</router-link></li>
+            <li><router-link to="search?genre=History">History</router-link></li>
         </ul>
 
         <!-- Slide Nav On Mobile -->
@@ -33,13 +33,13 @@
 
         <nav>
             <div class="nav-wrapper">
-                <a href="/home" class="brand-logo">WildCine</a>
+                <router-link to="/" class="brand-logo">WildCine</router-link>
                 <ul class="right hide-on-med-and-down">
                     <li><input type="text" v-model="search"></li>
                     <li><router-link to="/favoris">Favoris<span class="new badge">{{ count }}</span></router-link></li>
                     <!-- Dropdown Trigger -->
                     <li>
-                        <a @click="toggleClick()" class="dropdown-button" href="#!" v-model="genre" data-activates="dropdown1">Genre
+                        <a class="dropdown-button" href="#!" data-target="dropdown1">Genre
                             <i class="material-icons right"></i>
                         </a>
                     </li>
@@ -63,15 +63,12 @@
 		</ul>
 
 		<div v-else><p>Votre recherche n'a aboutit à aucun résultat, veuillez ne pas être aussi culturé !!</p></div>
-
-
                 
     </header>
 </template>
 
 <script>
     import { mapState } from 'vuex'
-    import axios from 'axios'
 
     export default {
         props: ["title", "film"],
@@ -79,32 +76,29 @@
             return {
 				search: '',
                 input: false,
-                // isHide: false,
-                genre: '',
             }
         },
         computed: mapState({
             films: state => state.films,
             favss: state => state.favoris,
-            // genre: state => state.genre,
             count() {
                 return this.favss.length
             },
-            genre: function() {
-                return this.film.filter(function(genre) {
-                    if (this.film[id].Genre === this.film.Genre) {
-                        return this.film[id]
-                        afficheUnFilm(film.id)
-                    }
-                })
-            }
+            // genre: function() {
+            //     return this.film.filter(function(genre) {
+            //         if (this.film[id].Genre === this.film.Genre) {
+            //             return this.film[id]
+            //             afficheUnFilm(film.id)
+            //         }
+            //     })
+            // }
         }),
-        created() {
-        },
+        // created() {
+        // },
         watch: {
 			search(uno, dos) {  console.log(this.film)
 				if (this.$route.path === '/Film') {
-				this.$router.push('/');
+					this.$router.push('/');
 				}
                 // gérer l'autocomplete
                 if (uno.length > 1) {
@@ -115,9 +109,6 @@
 					this.input = false;
 				}
             },
-            genre(){
-                console.log(this.film)
-            }
 		},
 		methods : {
 			afficheUnFilm(id) { 
@@ -128,9 +119,9 @@
             },
             toggleClick() { 
                 let isShow = $('.side-nav').show();
-                if (isShow) { debugger
+                if (isShow) {
                     $('.side-nav').hide();
-                } else { debugger
+                } else {
                     $('.side-nav').show();
                 }
             }
@@ -141,14 +132,12 @@
                 var elems = document.querySelectorAll('.dropdown-button');
                 var instances = M.Dropdown.init(elems);
             });
-
-              document.addEventListener('DOMContentLoaded', function() {
+		
+			document.addEventListener('DOMContentLoaded', function() {
                 var elems = document.querySelectorAll('.dropdown-trigger');
                 var instances = M.Dropdown.init(elems);
-            });
-
-            // $('.dropdown-trigger').dropdown();
-
+			});
+			
             // $(".button-collapse").sideNav();
             // $('.button-collapse').sideNav('show'); debugger
             // $('.collapsible').collapsible();
@@ -163,8 +152,6 @@
             //     onOpen: function(el) { }, // A function to be called when sideNav is opened
             //     onClose: function(el) { }, // A function to be called when sideNav is closed
             //     }
-            
-        
         }     
     }
 
@@ -215,6 +202,19 @@ nav {
     background-color: wheat;
     border-radius: 4px;
 }
+
+#dropdown1 {
+	top: -64px;
+}
+
+.dropdown-content {
+	background-color: #54626c;
+}
+
+.dropdown-content li>a, .dropdown-content li>span {
+	color: #fff;
+}
+
 
 
 </style>

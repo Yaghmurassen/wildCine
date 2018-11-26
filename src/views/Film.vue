@@ -78,10 +78,10 @@ h1 {
     height: auto;
     margin-bottom: 10px;
     object-fit: cover;
-    transition: transform .6s;
-    &:hover{
-      transform: scale(1.4);
-    }
+    // transition: transform .6s;
+    // &:hover{
+    //   transform: scale(1.4);
+    // }
     @media screen and (max-width: 992px) {
       width: 40vw;
     }

@@ -146,16 +146,15 @@ app.get('/search', function(req, res) {
             return true;
           }
         });
-      }
+	  }
       if (req.query.genre){
         films = films.filter((e) => {
            if (e.Genre.includes(req.query.genre.capitalize())) {
-            console.log('\nFilm avec le genre: '+ req.query.genre +' => '+ e.Title);
+			console.log('\nFilm avec le genre: '+ req.query.genre +' => '+ e.Title);
             return true;
           }
         });
       }
-      
       res.json(films);
     });
   } else {
