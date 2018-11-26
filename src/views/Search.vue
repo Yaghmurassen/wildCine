@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="back">
 		<ul @click="afficheUnFilm(film.id)" v-for="film in films" :key="film.id" class="collection">
 			<li class="collection-item avatar">
 				<img :src="film.Poster" alt="Affiche" class="circle">
@@ -61,6 +61,14 @@ export default {
 	cursor: pointer;
 	// opacity: 0.9;
 	background-color: #ffffff;
+}
+
+.back {
+	margin-top: 30px;
+    min-height: 70vh;
+    max-width: 1200px;
+    margin: auto;
+    background-color: grey;
 }
 
 

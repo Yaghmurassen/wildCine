@@ -24,7 +24,7 @@
                         </div>
                     </div>
                 </li>
-                <li><a href="#!"><i class="fa fa-heart" style="font-size:12px"></i><router-link to="/favoris"> Favoris</router-link></a></li>
+                <li><a class="favo" href="#!"><i class="fa fa-heart" style="font-size:12px"></i><router-link to="/favoris"> Favoris</router-link></a></li>
                 <li><input class="waves-effect" type="text" v-model="search"></li>
              </ul>
 
@@ -198,9 +198,16 @@ nav {
 	background-color: #ffffff;
 }
 
+.favo {
+	color: #fff;
+}
+
 #slide-out {
-    background-color: wheat;
+    background-color: #54626c;
     border-radius: 4px;
+	& a  {
+		color: #fff;
+	}
 }
 
 #dropdown1 {

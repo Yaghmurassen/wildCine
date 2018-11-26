@@ -128,11 +128,11 @@ app.get('/search', function(req, res) {
   const error = [];
 
   if (req.query.year && typeof(req.query.year) !== "Number" && req.query.year.length !== 4) {
-    error.push("L'année renseignée n'est pas valide. Veuillez rentrer une date correct bande de fdp.")
+	error.push("L'année renseignée n'est pas valide. Veuillez rentrer une date correct.")
   }
 
   if (req.query.genre && !/^[a-zA-Z]+$/gi.test(req.query.genre)) {
-    error.push("Le genre renseigné n'est pas valide. Veuillez rentrer un genre correct bande de fdp.");
+    error.push("Le genre renseigné n'est pas valide. Veuillez rentrer un genre correct.");
   }
 
   if (!error.length){
