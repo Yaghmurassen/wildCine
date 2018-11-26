@@ -5,7 +5,8 @@
 		<div class="row">
 			<div class="col l6 s12">
 			<!-- <h5 class="white-text">Wild Cine</h5> -->
-			<p class="grey-text text-lighten-4">“Le cinéma, c’est l’écriture moderne dont l’encre est la lumière.” - Jean Cocteau</p> 
+			<p class="grey-text text-lighten-4">“Le cinéma, c’est l’écriture moderne dont l’encre est la lumière.” - Jean Cocteau</p>
+			<a href="https://www.codewars.com/users/Yagh" target="_blank"><img src="https://www.codewars.com/users/Yagh/badges/small"></a>
 			</div>
 			<div class="col l4 offset-l2 s12">
 			<!-- <h5 class="white-text">Share</h5> -->

@@ -25,12 +25,14 @@ export default {
 	},
 	computed: mapState({
 		films: state => state.films
-		}),	
-	created() {
-		if ('genre' in this.$route.query && this.$route.query.genre) {
-			this.$store.dispatch('searchGenre', this.$route.query.genre)
-			this.input = false;
+	}),	
+	watch:{
+		$route (){
+			this.initSearch()
 		}
+	},
+	created() {
+		this.initSearch()
 		// console.log(this.$route)
 	},
 	methods : {
@@ -40,6 +42,11 @@ export default {
 				this.input = false;
 			}})
 		},
+		initSearch() {
+			if ('genre' in this.$route.query && this.$route.query.genre) {
+				this.$store.dispatch('searchGenre', this.$route.query.genre)
+			}
+		}
 	}
 }
 </script>

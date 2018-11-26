@@ -222,7 +222,9 @@ nav {
 	color: #fff;
 }
 
-
+.material-icons {
+	color: #fff;
+}
 
 </style>
 
