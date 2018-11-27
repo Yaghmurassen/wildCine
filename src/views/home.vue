@@ -30,10 +30,6 @@ export default {
 		// fetcher les premières data
 		this.$store.dispatch('loadFilms');
 		this.$store.dispatch('loadFavoris');
-
-		// var elems = document.querySelectorAll('.carousel');
-		// var instances = M.Carousel.init(elems);
-
 	},
 	mounted() { 
 		M.AutoInit();
@@ -68,9 +64,10 @@ p {
 }
 
 article {
+	width: 80%;
 	padding-top: 30px;
 	padding-bottom: 30px;
-	margin-top: 30px;
+	margin-top: 60px;
 	margin-bottom: 30px;
 	margin-left: auto;
     margin-right: auto;
@@ -79,9 +76,5 @@ article {
 	background-color: #bcc0c3;
 	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 12px 0 rgba(0,0,0,0.19);
 }
-
-// background: linear-gradient(to right, blue, white);
-// background: linear-gradient(70deg, blue, pink);
-// background-image:radial-gradient(white, black);
 
 </style>

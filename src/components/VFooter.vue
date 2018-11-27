@@ -2,11 +2,11 @@
 	
 	<footer class="page-footer">
 		<div class="container">
-		<div class="row">
+		<div class="row rowFooter">
 			<div class="col l6 s12">
 			<!-- <h5 class="white-text">Wild Cine</h5> -->
 			<p class="grey-text text-lighten-4">“Le cinéma, c’est l’écriture moderne dont l’encre est la lumière.” - Jean Cocteau</p>
-			<a href="https://www.codewars.com/users/Yagh" target="_blank"><img src="https://www.codewars.com/users/Yagh/badges/small"></a>
+			<a href="https://www.codewars.com/users/Yagh/completed" target="_blank"><img src="https://www.codewars.com/users/Yagh/badges/small"></a>
 			</div>
 			<div class="col l4 offset-l2 s12">
 			<!-- <h5 class="white-text">Share</h5> -->
@@ -40,15 +40,16 @@ export default {
 .page-footer {
   	background-color: #54626c;
   	border-radius: 3px;
- 	// margin-top: 30px;
 	padding-top: unset;
-	// position: fixed;
     bottom: 0px;
-    // width: 98vw;
+    @media screen and (max-width: 400px) {
+		margin-top: 130px;
+	}
 }
 
 img {
 	max-height: 2em;
+	max-width: 100%;
 }
 
 ul {
@@ -68,7 +69,6 @@ li {
 
 .container {
     text-align: left;
-	// margin-bottom: -20px;
 }
 .right:hover {
 	opacity: 0.5;
@@ -78,5 +78,10 @@ h5 {
 	margin:10px 0;
 }
 
+@media screen and (max-width: 992px) {
+	.rowFooter {
+		margin-bottom: unset;
+	}
+}
 
 </style>

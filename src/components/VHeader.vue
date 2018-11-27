@@ -17,42 +17,46 @@
 
         <!-- Slide Nav On Mobile -->
 
-        <ul id="slide-out" class="side-nav">
-                <li><div class="user-view">
-                        <div class="background">
-                            <img src="images/office.jpg">
-                        </div>
-                    </div>
-                </li>
-                <li><a class="favo" href="#!"><i class="fa fa-heart" style="font-size:12px"></i><router-link to="/favoris"> Favoris</router-link></a></li>
-                <li><input class="waves-effect" type="text" v-model="search"></li>
-             </ul>
+        <!-- <ul id="slide-out" class="side-nav">
+			<a href="#" data-activates="mobile-demo" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
+			<li><a class="favo" href="#!"><i class="fa fa-heart" style="font-size:12px"></i><router-link to="/favoris"> Favoris</router-link></a></li>
+			<a><router-link to="/"> Home</router-link></a></li>
+			<li><input class="waves-effect" type="text" v-model="search"></li>
+		</ul> -->
 
-        <a href="#" @click="toggleClick()" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-
+		<ul id="slide-out" class="sidenav fixed">
+			<li style="padding-top: 40px;">
+				<a class="favo" href="#!">
+				<i class="fa fa-heart" style="font-size:12px"></i>
+				<router-link to="/favoris"> Favoris</router-link></a>
+			</li>
+			<li>
+				<a><i class="material-icons">home</i>
+				<router-link to="/"> Home</router-link></a>
+			</li>
+			<li>
+				<input class="waves-effect" type="text" v-model="search"><i class="material-icons">search</i>
+			</li>
+		</ul>
+		<a href="#" data-target="slide-out" class="sidenav-trigger xsNav"><i class="material-icons xsNav">menu</i></a>
+		<!-- <a href="#" @click="toggleClick()" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a> -->
 
         <nav>
             <div class="nav-wrapper">
                 <router-link to="/" class="brand-logo">WildCine</router-link>
                 <ul class="right hide-on-med-and-down">
-                    <li><input type="text" v-model="search"></li>
+                    <li><i class="material-icons">search<input type="text" v-model="search"></i></li>
                     <li><router-link to="/favoris">Favoris<span class="new badge">{{ count }}</span></router-link></li>
-                    <!-- Dropdown Trigger -->
                     <li>
                         <a class="dropdown-button" href="#!" data-target="dropdown1">Genre
-                            <i class="material-icons right"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-button" href="#!" data-activates="dropdown1">Année
-                            <i class="material-icons right"></i>
+						<i class="material-icons right"></i>
                         </a>
                     </li>
                 </ul>
             </div>
         </nav>
-		<ul @click="afficheUnFilm(film.id)" v-if="film.id.length !== 0" v-for="film in films" :key="film.id" v-show="input" class="collection">
-			<li class="collection-item avatar">
+		<ul v-if="$store.state.films.length !== 0" v-show="input" class="collection">
+			<li class="collection-item avatar"  v-for="film in films" :key="film.id" @click="afficheUnFilm(film.id)">
 				<img :src="film.Poster" alt="Affiche" class="circle">
 				<span class="title">{{film.Title}}</span>
 				<p>{{film.Year}}, {{film.Director}}<br>
@@ -62,7 +66,7 @@
 			</li>
 		</ul>
 
-		<div v-else><p>Votre recherche n'a aboutit à aucun résultat, veuillez ne pas être aussi culturé !!</p></div>
+		<div v-else><p class="nomatch">Votre recherche n'a aboutit à aucun résultat, veuillez ne pas être aussi culturé !!</p></div>
                 
     </header>
 </template>
@@ -84,19 +88,9 @@
             count() {
                 return this.favss.length
             },
-            // genre: function() {
-            //     return this.film.filter(function(genre) {
-            //         if (this.film[id].Genre === this.film.Genre) {
-            //             return this.film[id]
-            //             afficheUnFilm(film.id)
-            //         }
-            //     })
-            // }
         }),
-        // created() {
-        // },
         watch: {
-			search(uno, dos) {  console.log(this.film)
+			search(uno, dos) {  
 				if (this.$route.path === '/Film') {
 					this.$router.push('/');
 				}
@@ -111,7 +105,7 @@
             },
 		},
 		methods : {
-			afficheUnFilm(id) { 
+			afficheUnFilm(id) {  
 				this.$store.dispatch('afficheUnFilm', {id:id, callback: () =>  {
 					this.$router.push('/Film');
 					this.input = false;
@@ -127,31 +121,18 @@
             }
 		},
         mounted() {
-            // document.querySelectorAll('.dropdown-button').dropdown();
-            document.addEventListener('DOMContentLoaded', function() {
-                var elems = document.querySelectorAll('.dropdown-button');
-                var instances = M.Dropdown.init(elems);
-            });
-		
 			document.addEventListener('DOMContentLoaded', function() {
-                var elems = document.querySelectorAll('.dropdown-trigger');
-                var instances = M.Dropdown.init(elems);
+				var db = document.querySelectorAll('.dropdown-button');
+				var instances = M.Dropdown.init(db);
+				var dt = document.querySelectorAll('.dropdown-trigger');
+				var instances = M.Dropdown.init(dt);
+				// var bc = document.querySelectorAll('.button-collapse');
+				// var instances = M.Dropdown.init(bc);
+				// var sd = document.querySelectorAll('.sidenav');
+				// var instances = M.Sidenav.init(sd);
+				var elem = document.querySelector('.sidenav');
+				var instance = M.Sidenav.init(elem);
 			});
-			
-            // $(".button-collapse").sideNav();
-            // $('.button-collapse').sideNav('show'); debugger
-            // $('.collapsible').collapsible();
-
-            // this.toggleClick()
-            
-            // {
-            //     menuWidth: 300, // Default is 300
-            //     edge: 'right', // Choose the horizontal origin
-            //     closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-            //     draggable: true, // Choose whether you can drag to open on touch screens,
-            //     onOpen: function(el) { }, // A function to be called when sideNav is opened
-            //     onClose: function(el) { }, // A function to be called when sideNav is closed
-            //     }
         }     
     }
 
@@ -207,7 +188,13 @@ nav {
     border-radius: 4px;
 	& a  {
 		color: #fff;
+		font-size: 18px;
 	}
+}
+
+input {
+	height: 60% !important;
+	width: 90% !important;
 }
 
 #dropdown1 {
@@ -226,19 +213,63 @@ nav {
 	color: #fff;
 }
 
+
+// FIX SIDENAV SPACING
+.side-nav li>a {
+  padding: 0 16px;
+}
+//FIX SIDEBAR DIVIDERS
+.side-nav .divider {
+  margin:0;
+  height:8px;
+  border-bottom:1px solid #e0e0e0;
+  background-color: transparent;
+}
+
+// SIDENAV HEADER
+.sidenav-header {
+margin-bottom: 0px;
+padding: 15px 0 0 15px;
+  .row {
+    margin-bottom: 0;
+  }
+}
+.sidenav-footer {
+margin-bottom: 0px;
+padding: 0;
+  .row {
+    margin-bottom: 0;
+    .social-icons {
+      a {
+        opacity: 0.5;
+        padding: 0;
+        text-align:center;
+        & :hover {
+          background-color:inherit;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+.xsNav {
+	display: none;
+	@media screen and (max-width: 992px) {
+		display: block;
+		padding-bottom: 10px;
+		// position: absolute;
+		// left: 30px;
+		// top: 25px;
+    	// font-size: 30px;
+	}
+}
+
+.nomatch {
+	font-weight: bold;
+    color: white;
+    font-size: 20px;
+    margin-top: 80px;
+}
+
 </style>
-
-
-
-
-// $( ".faq-question" ).click(function() {
-//     $(this).toggleClass('open');
-// });
-
-// .faq-question .icon:after {
-//     content: '+';
-// }
-// .faq-question.open .icon:after {
-//     content: '-';
-// }
-
