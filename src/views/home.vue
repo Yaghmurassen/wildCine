@@ -4,7 +4,7 @@
 		<div v-if="films.length !== 0" class="carousel">
 			<film-card class="carousel-item" v-for="film in films" :key="film.id" :film="film"></film-card>
 		</div>
-		<div v-else><img class="cineVide" src="https://blog.francetvinfo.fr/bureau-rome/files/2018/01/Cinema-gratis.jpg" alt="404"><p class="nomatch">Votre recherche n'a aboutit à aucun résultat, veuillez ne pas être aussi culturé !!</p></div>
+		<div style="margin:auto;" v-else><img class="cineVide" src="https://blog.francetvinfo.fr/bureau-rome/files/2018/01/Cinema-gratis.jpg" alt="404"><p class="nomatch">Votre recherche n'a aboutit à aucun résultat, veuillez ne pas être aussi culturé !!</p></div>
 	</main>
 	<article>
 		<p>WildCine est une plateforme OpenSource de base de donnée de films. Les utilisateurs peuvent rechercher et constituer leurs favoris dans un espace dédié.</p>
@@ -45,6 +45,7 @@ export default {
 
 .main {
 	display: flex;
+	width: 100%;
 }
 .carousel{
 	height: 430px;
