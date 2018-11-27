@@ -3,17 +3,39 @@
         <!-- Dropdown Structure -->
 		
         <ul id="dropdown1" class="dropdown-content">
-            <li><router-link to="search?genre=Action">Action</router-link></li>
-            <li><router-link to="search?genre=Adventure">Adventure</router-link></li>
-            <li><router-link to="search?genre=Fantasy">Fantasy</router-link></li>
-            <li><router-link to="search?genre=Drama">Drama</router-link></li>
-            <li><router-link to="search?genre=Horror">Horror</router-link></li>
-            <li><router-link to="search?genre=Sci">Sci-Fi</router-link></li>
-            <li><router-link to="search?genre=Thriller">Thriller</router-link></li>
-            <li><router-link to="search?genre=Comedy">Comedy</router-link></li>
-            <li><router-link to="search?genre=Crime">Crime</router-link></li>
-            <li><router-link to="search?genre=Biography">Biography</router-link></li>
-            <li><router-link to="search?genre=History">History</router-link></li>
+            <li>
+				<router-link to="search?genre=Action">Action</router-link>
+			</li>
+            <li>
+				<router-link to="search?genre=Adventure">Adventure</router-link>
+			</li>
+            <li>
+				<router-link to="search?genre=Fantasy">Fantasy</router-link>
+			</li>
+            <li>
+				<router-link to="search?genre=Drama">Drama</router-link>
+			</li>
+            <li>
+				<router-link to="search?genre=Horror">Horror</router-link>
+			</li>
+            <li>
+				<router-link to="search?genre=Sci">Sci-Fi</router-link>
+			</li>
+            <li>
+				<router-link to="search?genre=Thriller">Thriller</router-link>
+			</li>
+            <li>
+				<router-link to="search?genre=Comedy">Comedy</router-link>
+			</li>
+            <li>
+				<router-link to="search?genre=Crime">Crime</router-link>
+			</li>
+            <li>
+				<router-link to="search?genre=Biography">Biography</router-link>
+			</li>
+            <li>
+				<router-link to="search?genre=History">History</router-link>
+			</li>
         </ul>
 
         <!-- Slide Nav On Mobile -->
@@ -113,10 +135,6 @@
 				var instances = M.Dropdown.init(db);
 				var dt = document.querySelectorAll('.dropdown-trigger');
 				var instances = M.Dropdown.init(dt);
-				// var bc = document.querySelectorAll('.button-collapse');
-				// var instances = M.Dropdown.init(bc);
-				// var sd = document.querySelectorAll('.sidenav');
-				// var instances = M.Sidenav.init(sd);
 				var elem = document.querySelector('.sidenav');
 				var instance = M.Sidenav.init(elem);
 			});
@@ -255,6 +273,5 @@ padding: 0;
     	// font-size: 30px;
 	}
 }
-
 
 </style>
