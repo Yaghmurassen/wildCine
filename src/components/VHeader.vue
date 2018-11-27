@@ -1,6 +1,7 @@
 <template>
     <header>
         <!-- Dropdown Structure -->
+		
         <ul id="dropdown1" class="dropdown-content">
             <li><router-link to="search?genre=Action">Action</router-link></li>
             <li><router-link to="search?genre=Adventure">Adventure</router-link></li>
@@ -17,14 +18,10 @@
 
         <!-- Slide Nav On Mobile -->
 
-        <!-- <ul id="slide-out" class="side-nav">
-			<a href="#" data-activates="mobile-demo" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
-			<li><a class="favo" href="#!"><i class="fa fa-heart" style="font-size:12px"></i><router-link to="/favoris"> Favoris</router-link></a></li>
-			<a><router-link to="/"> Home</router-link></a></li>
-			<li><input class="waves-effect" type="text" v-model="search"></li>
-		</ul> -->
-
 		<ul id="slide-out" class="sidenav fixed">
+			<li>
+				<p>WildCine</p>
+			</li>
 			<li style="padding-top: 40px;">
 				<a class="favo" href="#!">
 				<i class="fa fa-heart" style="font-size:12px"></i>
@@ -45,10 +42,10 @@
             <div class="nav-wrapper">
                 <router-link to="/" class="brand-logo">WildCine</router-link>
                 <ul class="right hide-on-med-and-down">
-                    <li><i class="material-icons">search<input type="text" v-model="search"></i></li>
-                    <li><router-link to="/favoris">Favoris<span class="new badge">{{ count }}</span></router-link></li>
+                    <li><i class="material-icons waves-effect">search<input type="text" v-model="search"></i></li>
+                    <li><router-link class="waves-effect" to="/favoris">Favoris<span class="new badge">{{ count }}</span></router-link></li>
                     <li>
-                        <a class="dropdown-button" href="#!" data-target="dropdown1">Genre
+                        <a class="dropdown-button waves-effect" href="#!" data-target="dropdown1">Genre
 						<i class="material-icons right"></i>
                         </a>
                     </li>
@@ -65,8 +62,6 @@
 				<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
 			</li>
 		</ul>
-
-		<div v-else><p class="nomatch">Votre recherche n'a aboutit à aucun résultat, veuillez ne pas être aussi culturé !!</p></div>
                 
     </header>
 </template>
@@ -111,14 +106,6 @@
 					this.input = false;
 				}})
             },
-            toggleClick() { 
-                let isShow = $('.side-nav').show();
-                if (isShow) {
-                    $('.side-nav').hide();
-                } else {
-                    $('.side-nav').show();
-                }
-            }
 		},
         mounted() {
 			document.addEventListener('DOMContentLoaded', function() {
@@ -186,9 +173,13 @@ nav {
 #slide-out {
     background-color: #54626c;
     border-radius: 4px;
-	& a  {
+	& a {
 		color: #fff;
 		font-size: 18px;
+	}
+	& p {
+		color: #fff;
+		font-size: 25px;
 	}
 }
 
@@ -265,11 +256,7 @@ padding: 0;
 	}
 }
 
-.nomatch {
-	font-weight: bold;
-    color: white;
-    font-size: 20px;
-    margin-top: 80px;
-}
+
+
 
 </style>

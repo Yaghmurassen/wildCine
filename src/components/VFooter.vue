@@ -43,7 +43,7 @@ export default {
 	padding-top: unset;
     bottom: 0px;
     @media screen and (max-width: 400px) {
-		margin-top: 130px;
+		margin-top: 190px;
 	}
 }
 

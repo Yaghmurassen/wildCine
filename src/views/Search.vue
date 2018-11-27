@@ -72,7 +72,7 @@ export default {
 
 .back {
 	margin-top: 30px;
-    min-height: 70vh;
+    min-height: 80vh;
     max-width: 1200px;
     margin: auto;
     background-color: grey;
