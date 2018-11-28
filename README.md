@@ -10,7 +10,7 @@ Clône le depot
 # install dependencies
 on npm install à la racine :
 
-    cd wildCine && nmp i
+    cd wildCine && npm i
 
 lancer les commandes suivantes :
 
